@@ -20,7 +20,6 @@ class DayWeekMonthCalculator:
             raise Exception("inception date should be date time")
         self.inception_date = inception_date
 
-    # 40, 5
     def compute_day_info(self, compute_date: date, week_calculation_offset: int = 0, month_calculation_offset: int = 0) -> DayInfo:
         if not isinstance(compute_date, date):
             raise Exception("compute date should be datetime")
@@ -40,6 +39,7 @@ class DayWeekMonthCalculator:
 
         return day_info
 
+PROJECT_TO_MAP = "Daily"
 
 day_week_month_calculator = DayWeekMonthCalculator(date(2018, 10, 31))
 day_info = day_week_month_calculator.compute_day_info(compute_date = date.today(), week_calculation_offset = 40,
@@ -53,23 +53,21 @@ api.sync()
 project_id = None
 projects = api.state['projects']
 for project in projects:
-    if project["name"] == "Tes":
+    if project["name"] == PROJECT_TO_MAP:
         project_id = project["id"]
 
 if project_id is None:
-    raise Exception()
+    raise Exception("Could not found project")
 
 if day_info.new_month:
     month_section = api.sections.add(f"Month {day_info.month}", project_id=project_id)
+
 if day_info.new_week:
     week_section = api.sections.add(f"Week {day_info.week}", project_id=project_id)
 
 day_section = api.sections.add(f"Day {day_info.day}", project_id=project_id)
+
 api.commit()
-
-print(project_id)
-
-# print(api.state['projects'])
 
 if __name__ == "__main__":
     pass
