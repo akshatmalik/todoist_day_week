@@ -47,7 +47,7 @@ day_info = day_week_month_calculator.compute_day_info(compute_date = date.today(
 # day_info = day_week_month_calculator.compute_day_info(compute_date = date(2020, 2, 24), week_calculation_offset = 40,
 #                                                  month_calculation_offset = 5)
 
-api = TodoistAPI("7ef0dcf2d8c6a0cb21bfe5bdc5877f80a7ee8838")
+api = TodoistAPI("7ef0dcf2d8c6a0cb21bfe5bdc5877f80a7ee1111")
 api.sync()
 
 project_ids = []
